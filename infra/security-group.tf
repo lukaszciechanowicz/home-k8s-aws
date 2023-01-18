@@ -1,15 +1,14 @@
 resource "aws_security_group" "minions" {
-  name        = "allow_tls"
-  description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  name        = "dev_eu-west-1_core_eks_worker_lci"
+  description = "LCI EKS Minions Security Group"
+  vpc_id      = "vpc-0de553810614679b4"
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
+    description      = "SSH from VPC"
+    from_port        = 22
+    to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.main.cidr_block]
-    ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+    cidr_blocks      = ["10.35.128.0/17"]
   }
 
   egress {
@@ -22,5 +21,12 @@ resource "aws_security_group" "minions" {
 
   tags = {
     Name = "dev_eu-west-1_core_eks_worker_lci"
+    "mp:owner" = "CloudEngineering"
+    "mp:environment" = "dev"
+    "mp:region" = "eu-west-1"
+    "mp:service" = "eks"
+    "mp:role" = "minion"
+    "mp:customer" = "shd"
+    "mp:product" = "core"    
   }
 }
