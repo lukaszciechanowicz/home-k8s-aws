@@ -21,6 +21,6 @@ resource "aws_security_group" "minions" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "dev_eu-west-1_core_eks_worker_lci"
   }
 }
